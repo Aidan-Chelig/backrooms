@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=7]
+code = "shader_type canvas_item;
+
+uniform sampler2D portaltex;
+
+void fragment() {
+	COLOR = texture(portaltex, UV);
+}"
+
+[resource]
+resource_local_to_scene = true
+shader = SubResource( 7 )

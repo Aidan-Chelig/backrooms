@@ -1,0 +1,97 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://walls/wall.tscn" type="PackedScene" id=1]
+[ext_resource path="res://floor/floor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://portal/portal.tscn" type="PackedScene" id=3]
+[ext_resource path="res://FPSBasic/FPSBasic.tscn" type="PackedScene" id=4]
+
+[sub_resource type="Shader" id=6]
+resource_local_to_scene = true
+resource_name = "asdf"
+code = "shader_type canvas_item;
+
+uniform sampler2D stencil_tex;
+
+void fragment(){
+//	vec2 uv = UV - 0.5;
+//	uv.x *= 2.0;
+//	float dist = sqrt(uv.x*uv.x+uv.y*uv.y);
+	COLOR = texture(TEXTURE, UV);
+	COLOR.a = texture(stencil_tex, UV).g;
+}"
+
+[sub_resource type="ViewportTexture" id=7]
+viewport_path = NodePath("mask")
+
+[sub_resource type="ShaderMaterial" id=8]
+resource_local_to_scene = true
+shader = SubResource( 6 )
+shader_param/stencil_tex = SubResource( 7 )
+
+[sub_resource type="ViewportTexture" id=9]
+viewport_path = NodePath("portalView")
+
+[node name="Spatial" type="Spatial"]
+
+[node name="Room" type="Room" parent="."]
+transform = Transform( 1.00579, 0, 0, 0, 1.00579, 0, 0, 0, 1.00579, 0, 0, 0 )
+room_simplify = 0.44
+
+[node name="body" type="Spatial" parent="Room"]
+
+[node name="WestRight" parent="Room/body" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.95439, 0, 6.04489 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="WestLeft" parent="Room/body" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.95439, 0, -1.08282 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="EastLeft" parent="Room/body" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8938, 0, 6.04489 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="EastRight" parent="Room/body" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8938, 0, -1.08282 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="SouthRight" parent="Room/body" instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6.05452, 0, -5.97574 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="SouthLeft" parent="Room/body" instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.979046, 0, -5.97574 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="NorthLeft" parent="Room/body" instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6.05452, 0, 5.95835 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="NorthRight" parent="Room/body" instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.979046, 0, 5.95835 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="Floor" parent="Room/body" instance=ExtResource( 2 )]
+transform = Transform( 6, 0, 0, 0, 0.066, 0, 0, 0, 6, 0, 0, 0 )
+
+[node name="Portal" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.06083 )
+
+[node name="portalTex" parent="Portal/CanvasLayer" index="0"]
+material = SubResource( 8 )
+texture = SubResource( 9 )
+
+[node name="maskRoot" parent="Portal/mask" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -6.06083 )
+
+[node name="maskCam" parent="Portal/mask/maskRoot" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.428, 6.06083 )
+
+[node name="portalCam" parent="Portal/portalView/Handle" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.428, 6.06083 )
+
+[node name="FPS" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.33279, 0 )
+
+[editable path="Portal"]
+[editable path="FPS"]

@@ -1,0 +1,147 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://floor/floor.tscn" type="PackedScene" id=1]
+[ext_resource path="res://walls/wall.tscn" type="PackedScene" id=2]
+[ext_resource path="res://FPSBasic/FPSBasic.tscn" type="PackedScene" id=3]
+
+[node name="SmallRoom" type="Spatial"]
+
+[node name="RoomManager" type="RoomManager" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.56241, 0 )
+roomlist = NodePath(".")
+gameplay_monitor = true
+
+[node name="Room3" type="Room" parent="RoomManager"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.638334, 2.41666, -55.2701 )
+
+[node name="body" type="Spatial" parent="RoomManager/Room3"]
+
+[node name="WestRight" parent="RoomManager/Room3/body" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.95439, 0, 6.04489 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="WestLeft" parent="RoomManager/Room3/body" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.95439, 0, -1.08282 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="EastLeft" parent="RoomManager/Room3/body" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8938, 0, 6.04489 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="EastRight" parent="RoomManager/Room3/body" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8938, 0, -1.08282 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="SouthRight" parent="RoomManager/Room3/body" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6.05452, 0, -5.97574 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="SouthLeft" parent="RoomManager/Room3/body" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.979046, 0, -5.97574 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="NorthLeft" parent="RoomManager/Room3/body" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6.05452, 0, 5.95835 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="NorthRight" parent="RoomManager/Room3/body" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.979046, 0, 5.95835 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="Floor" parent="RoomManager/Room3/body" instance=ExtResource( 1 )]
+transform = Transform( 6, 0, 0, 0, 0.066, 0, 0, 0, 6, 0, 0, 0 )
+
+[node name="Portal" type="Portal" parent="RoomManager/Room3"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.000989914, 1.07246, 49.3284 )
+linked_room = NodePath("../../Room4")
+
+[node name="Room4" type="Room" parent="RoomManager"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.638334, 2.41666, -0.0107098 )
+
+[node name="body" type="Spatial" parent="RoomManager/Room4"]
+
+[node name="WestRight" parent="RoomManager/Room4/body" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.95439, 0, 6.04489 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="WestLeft" parent="RoomManager/Room4/body" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.95439, 0, -1.08282 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="EastLeft" parent="RoomManager/Room4/body" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8938, 0, 6.04489 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="EastRight" parent="RoomManager/Room4/body" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8938, 0, -1.08282 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="SouthRight" parent="RoomManager/Room4/body" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6.05452, 0, -5.97574 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="SouthLeft" parent="RoomManager/Room4/body" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.979046, 0, -5.97574 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="NorthLeft" parent="RoomManager/Room4/body" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6.05452, 0, 5.95835 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="NorthRight" parent="RoomManager/Room4/body" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.979046, 0, 5.95835 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="Floor" parent="RoomManager/Room4/body" instance=ExtResource( 1 )]
+transform = Transform( 6, 0, 0, 0, 0.066, 0, 0, 0, 6, 0, 0, 0 )
+
+[node name="Room5" type="Room" parent="RoomManager"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7833, 2.41666, -0.0107098 )
+
+[node name="body" type="Spatial" parent="RoomManager/Room5"]
+
+[node name="WestRight" parent="RoomManager/Room5/body" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.95439, 0, 6.04489 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="WestLeft" parent="RoomManager/Room5/body" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.95439, 0, -1.08282 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="EastLeft" parent="RoomManager/Room5/body" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8938, 0, 6.04489 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="EastRight" parent="RoomManager/Room5/body" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8938, 0, -1.08282 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="SouthRight" parent="RoomManager/Room5/body" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6.05452, 0, -5.97574 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="SouthLeft" parent="RoomManager/Room5/body" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.979046, 0, -5.97574 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="NorthLeft" parent="RoomManager/Room5/body" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6.05452, 0, 5.95835 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="NorthRight" parent="RoomManager/Room5/body" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.979046, 0, 5.95835 )
+handle_position = Vector3( 0, 0, -5.0176 )
+
+[node name="Floor" parent="RoomManager/Room5/body" instance=ExtResource( 1 )]
+transform = Transform( 6, 0, 0, 0, 0.066, 0, 0, 0, 6, 0, 0, 0 )
+
+[node name="FPS" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.60708, 1.04747 )
+
+[node name="Head" parent="FPS" index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.61688, 0 )
+
+[node name="Camera" parent="FPS/Head" index="0"]
+current = true
+
+[editable path="FPS"]
