@@ -15,7 +15,6 @@ onready var body = $body
 
 onready var mask_view = $mask
 onready var portal_view = $portalView
-onready var texture_rect = $CanvasLayer/portalTex
 
 
 onready var maskroot = $mask/maskRoot
@@ -38,7 +37,6 @@ func _ready():
 func _on_viewport_size_changed():
 	var size = OS.get_real_window_size();
 	print(size);
-	mask_view.size = size;
 	portal_view.size = size;
 
 
@@ -47,5 +45,5 @@ func _process(_delta):
 	if follow_cam:
 		mask_cam.global_transform = follow_cam.global_transform
 		maskroot.global_transform = body.global_transform;
-		maskroot.scale = Vector3(1,1,1);
+		maskroot.scale = Vector3(1.0,1.0,1.0);
 		portal_cam.transform = mask_cam.transform

@@ -194,7 +194,7 @@ texture = SubResource( 6 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.694535, 1.87569, -5.97959 )
 
 [node name="maskCam" parent="Portal/mask/maskRoot" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.338733, 0.643707, 6.10543 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.338733, 0.643704, 6.10543 )
 
 [node name="portalView" parent="Portal" index="3"]
 keep_3d_linear = true
@@ -203,7 +203,7 @@ keep_3d_linear = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.708, 1.876, -49.4174 )
 
 [node name="portalCam" parent="Portal/portalView/Handle" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.338733, 0.643707, 6.10543 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.338733, 0.643704, 6.10543 )
 
 [editable path="FPS"]
 [editable path="Portal"]
