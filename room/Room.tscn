@@ -1,44 +1,55 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://floor/floor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://walls/wall.tscn" type="PackedScene" id=2]
 [ext_resource path="res://FPSBasic/FPSBasic.tscn" type="PackedScene" id=3]
-[ext_resource path="res://room/portalshader.tres" type="Shader" id=4]
-[ext_resource path="res://portal/portal.tscn" type="PackedScene" id=5]
+[ext_resource path="res://portal/portal.tscn" type="PackedScene" id=4]
 
-[sub_resource type="ViewportTexture" id=1]
+[sub_resource type="Shader" id=1]
+resource_local_to_scene = true
+code = "shader_type spatial;
+render_mode unshaded;
+uniform sampler2D stencil_tex;
+
+void fragment() {
+    SCREEN_UV.y = 1f - SCREEN_UV.y;
+    ALBEDO.r = texture(stencil_tex, SCREEN_UV).r;
+    ALBEDO.g = texture(stencil_tex, SCREEN_UV).g;
+    ALBEDO.b = texture(stencil_tex, SCREEN_UV).b;
+    EMISSION = ALBEDO * 0.3f;
+    
+}"
+
+[sub_resource type="ViewportTexture" id=2]
 viewport_path = NodePath("Portal/portalView")
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=3]
 resource_local_to_scene = true
-shader = ExtResource( 4 )
-shader_param/stencil_tex = SubResource( 1 )
+shader = SubResource( 1 )
+shader_param/stencil_tex = SubResource( 2 )
 
-[sub_resource type="Shader" id=3]
+[sub_resource type="Shader" id=4]
 resource_local_to_scene = true
-resource_name = "asdf"
-code = "shader_type canvas_item;
+code = "shader_type spatial;
 
 uniform sampler2D stencil_tex;
 
-void fragment(){
-//	vec2 uv = UV - 0.5;
-//	uv.x *= 2.0;
-//	float dist = sqrt(uv.x*uv.x+uv.y*uv.y);
-	COLOR = texture(TEXTURE, UV);
-	COLOR.a = texture(stencil_tex, UV).g;
+void fragment() {
+    SCREEN_UV.y = 1f - SCREEN_UV.y;
+    ALBEDO.r = texture(stencil_tex, SCREEN_UV).r;
+    ALBEDO.g = texture(stencil_tex, SCREEN_UV).g;
+    ALBEDO.b = texture(stencil_tex, SCREEN_UV).b;
+    EMISSION = ALBEDO * 0.3f;
+    
 }"
 
-[sub_resource type="ViewportTexture" id=4]
-viewport_path = NodePath("mask")
+[sub_resource type="ViewportTexture" id=5]
+viewport_path = NodePath("Portal/portalView")
 
-[sub_resource type="ShaderMaterial" id=5]
+[sub_resource type="ShaderMaterial" id=6]
 resource_local_to_scene = true
-shader = SubResource( 3 )
-shader_param/stencil_tex = SubResource( 4 )
-
-[sub_resource type="ViewportTexture" id=6]
-viewport_path = NodePath("portalView")
+shader = SubResource( 4 )
+shader_param/stencil_tex = SubResource( 5 )
 
 [node name="SmallRoom" type="Spatial"]
 
@@ -88,7 +99,7 @@ handle_position = Vector3( 0, 0, -5.0176 )
 transform = Transform( 6, 0, 0, 0, 0.066, 0, 0, 0, 6, 0, 0, 0 )
 
 [node name="Room4" type="Room" parent="RoomManager"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.638334, 2.41666, -0.0107098 )
+transform = Transform( 1, 0, 0, 0, 1.95119, 0, 0, 0, 1, 0.638334, 2.41666, -0.0107098 )
 
 [node name="body" type="Spatial" parent="RoomManager/Room4"]
 
@@ -168,42 +179,39 @@ handle_position = Vector3( 0, 0, -5.0176 )
 transform = Transform( 6, 0, 0, 0, 0.066, 0, 0, 0, 6, 0, 0, 0 )
 
 [node name="FPS" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 0.742805, 0, 0, 0, 1, 0.355802, 2.09861, 0.368273 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.34837, 1.04747 )
 
 [node name="Head" parent="FPS" index="2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.566485, -0.242431 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.61688, 0 )
 
 [node name="Camera" parent="FPS/Head" index="0"]
 current = true
 
-[node name="Portal" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 0.955444, 0, 0, 0, 0.135902, 0.694535, 0.92025, -5.97959 )
-follow_cam_input = NodePath("../FPS/Head/Camera")
+[node name="Spatial" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.8383, 0.905024, 5.7987 )
+
+[node name="Portal" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1.99287, 0, 0, 0, 3.77753, 0, 0, 0, 0.332824, 0.635568, 0.983038, -5.96604 )
+follow_cam = NodePath("../FPS/Head/Camera")
+reference_node = NodePath("../Spatial")
 
 [node name="MeshOut" parent="Portal/body" index="0"]
-material/0 = SubResource( 2 )
+material/0 = SubResource( 3 )
 
 [node name="MeshIn" parent="Portal/body" index="1"]
-material/0 = SubResource( 2 )
-
-[node name="portalTex" parent="Portal/CanvasLayer" index="0"]
-material = SubResource( 5 )
-texture = SubResource( 6 )
-
-[node name="maskRoot" parent="Portal/mask" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.694535, 1.87569, -5.97959 )
-
-[node name="maskCam" parent="Portal/mask/maskRoot" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.338733, 0.643704, 6.10543 )
-
-[node name="portalView" parent="Portal" index="3"]
-keep_3d_linear = true
+material/0 = SubResource( 6 )
 
 [node name="Handle" parent="Portal/portalView" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.708, 1.876, -49.4174 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.8383, 0.905024, 5.7987 )
 
 [node name="portalCam" parent="Portal/portalView/Handle" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.338733, 0.643704, 6.10543 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.635568, 3.98221, 7.01351 )
+
+[node name="bodyTracker" parent="Portal" index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="camTracker" parent="Portal/bodyTracker" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.635568, 3.98221, 7.01351 )
 
 [editable path="FPS"]
 [editable path="Portal"]

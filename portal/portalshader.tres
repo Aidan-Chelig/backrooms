@@ -2,16 +2,15 @@
 
 [resource]
 resource_local_to_scene = true
-code = "shader_type spatial;
-render_mode unshaded;
+code = "shader_type canvas_item;
 
 uniform sampler2D stencil_tex;
 
-void fragment() {
-    SCREEN_UV.y = 1f - SCREEN_UV.y;
-    ALBEDO.r = texture(stencil_tex, SCREEN_UV).r;
-    ALBEDO.g = texture(stencil_tex, SCREEN_UV).g;
-    ALBEDO.b = texture(stencil_tex, SCREEN_UV).b;
-    EMISSION = ALBEDO * 0.3f;
-    
+void fragment(){
+//	vec2 uv = UV - 0.5;
+//	uv.x *= 2.0;
+//	float dist = sqrt(uv.x*uv.x+uv.y*uv.y);
+	COLOR = texture(TEXTURE, UV);
+//	COLOR.a = smoothstep(0.5, 0.4, dist);
+	COLOR.a = texture(stencil_tex, UV).g;
 }"

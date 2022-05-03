@@ -1,0 +1,16 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+resource_local_to_scene = true
+code = "shader_type spatial;
+render_mode unshaded;
+uniform sampler2D stencil_tex;
+
+void fragment() {
+    SCREEN_UV.y = 1f - SCREEN_UV.y;
+    ALBEDO.r = texture(stencil_tex, SCREEN_UV).r;
+    ALBEDO.g = texture(stencil_tex, SCREEN_UV).g;
+    ALBEDO.b = texture(stencil_tex, SCREEN_UV).b;
+    EMISSION = ALBEDO * 0.3f;
+    
+}"

@@ -1,52 +1,69 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://portal/portal.gd" type="Script" id=1]
+[ext_resource path="res://portal/portalshader.tres" type="Shader" id=2]
+[ext_resource path="res://portal/portalshader2.tres" type="Shader" id=3]
 
 [sub_resource type="CubeMesh" id=1]
+size = Vector3( 1, 1, 1 )
 
-[sub_resource type="SpatialMaterial" id=2]
-flags_unshaded = true
+[sub_resource type="ViewportTexture" id=12]
+viewport_path = NodePath("portalView")
+
+[sub_resource type="ShaderMaterial" id=13]
+resource_local_to_scene = true
+shader = ExtResource( 3 )
+shader_param/stencil_tex = SubResource( 12 )
 
 [sub_resource type="CubeMesh" id=11]
 flip_faces = true
+size = Vector3( 1, 1, 1 )
 
-[sub_resource type="SpatialMaterial" id=12]
-flags_unshaded = true
+[sub_resource type="ViewportTexture" id=14]
+viewport_path = NodePath("portalView")
+
+[sub_resource type="ShaderMaterial" id=15]
+resource_local_to_scene = true
+shader = ExtResource( 2 )
+shader_param/stencil_tex = SubResource( 14 )
 
 [node name="Portal" type="Spatial"]
 script = ExtResource( 1 )
+follow_cam = null
+reference_node = null
 
 [node name="body" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 
 [node name="MeshOut" type="MeshInstance" parent="body"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
 layers = 4
 mesh = SubResource( 1 )
 skeleton = NodePath("../..")
-material/0 = SubResource( 2 )
+material/0 = SubResource( 13 )
 __meta__ = {
 "_editor_description_": "mesh that renders outward with regular normals"
 }
 
 [node name="MeshIn" type="MeshInstance" parent="body"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
 layers = 4
 mesh = SubResource( 11 )
-material/0 = SubResource( 12 )
+material/0 = SubResource( 15 )
 __meta__ = {
 "_editor_description_": "Mesh that renders inward with flipped normals"
 }
 
-[node name="Portal" type="Portal" parent="body"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.796715 )
-
 [node name="portalView" type="Viewport" parent="."]
 size = Vector2( 1920, 1080 )
+keep_3d_linear = true
 render_target_v_flip = true
 render_target_update_mode = 3
 
 [node name="Handle" type="Spatial" parent="portalView"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.89406 )
 
 [node name="portalCam" type="Camera" parent="portalView/Handle"]
-transform = Transform( 0.80836, 0, -0.588689, 0, 1, 0, 0.588689, 0, 0.80836, 0, 2.12428, 3.28312 )
 cull_mask = 1048571
+
+[node name="bodyTracker" type="Spatial" parent="."]
+
+[node name="camTracker" type="Spatial" parent="bodyTracker"]
