@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://floor/floor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://walls/wall.tscn" type="PackedScene" id=2]
@@ -20,13 +20,9 @@ void fragment() {
     
 }"
 
-[sub_resource type="ViewportTexture" id=2]
-viewport_path = NodePath("Portal/portalView")
-
 [sub_resource type="ShaderMaterial" id=3]
 resource_local_to_scene = true
 shader = SubResource( 1 )
-shader_param/stencil_tex = SubResource( 2 )
 
 [sub_resource type="Shader" id=4]
 resource_local_to_scene = true
@@ -43,13 +39,9 @@ void fragment() {
     
 }"
 
-[sub_resource type="ViewportTexture" id=5]
-viewport_path = NodePath("Portal/portalView")
-
 [sub_resource type="ShaderMaterial" id=6]
 resource_local_to_scene = true
 shader = SubResource( 4 )
-shader_param/stencil_tex = SubResource( 5 )
 
 [node name="SmallRoom" type="Spatial"]
 

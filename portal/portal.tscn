@@ -1,13 +1,13 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://portal/portal.gd" type="Script" id=1]
-[ext_resource path="res://portal/portalshader.tres" type="Shader" id=2]
 [ext_resource path="res://portal/portalshader2.tres" type="Shader" id=3]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ViewportTexture" id=12]
+flags = 64
 viewport_path = NodePath("portalView")
 
 [sub_resource type="ShaderMaterial" id=13]
@@ -20,11 +20,12 @@ flip_faces = true
 size = Vector3( 1, 1, 1 )
 
 [sub_resource type="ViewportTexture" id=14]
+flags = 64
 viewport_path = NodePath("portalView")
 
 [sub_resource type="ShaderMaterial" id=15]
 resource_local_to_scene = true
-shader = ExtResource( 2 )
+shader = ExtResource( 3 )
 shader_param/stencil_tex = SubResource( 14 )
 
 [node name="Portal" type="Spatial"]

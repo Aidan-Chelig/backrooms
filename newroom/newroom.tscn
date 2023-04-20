@@ -14,49 +14,63 @@ room_simplify = 0.44
 [node name="body" type="Spatial" parent="Room"]
 
 [node name="WestRight" parent="Room/body" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.95439, 0, 6.04489 )
-handle_position = Vector3( 0, 0, -5.0176 )
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 6, 0, 6.04489 )
+handle_position = Vector3( 0, 0, -5 )
 
 [node name="WestLeft" parent="Room/body" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.95439, 0, -1.08282 )
-handle_position = Vector3( 0, 0, -5.0176 )
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 6, 0, -1.08282 )
+handle_position = Vector3( 0, 0, -5 )
 
 [node name="EastLeft" parent="Room/body" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8938, 0, 6.04489 )
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, -5.8938, 0, 6.04489 )
 handle_position = Vector3( 0, 0, -5.0176 )
 
 [node name="EastRight" parent="Room/body" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8938, 0, -1.08282 )
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, -5.8938, 0, -1.08282 )
 handle_position = Vector3( 0, 0, -5.0176 )
 
 [node name="SouthRight" parent="Room/body" instance=ExtResource( 1 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6.05452, 0, -5.97574 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 2, 0, -1, 0, -4.37114e-08, 6.05452, 0, -5.97574 )
 handle_position = Vector3( 0, 0, -5.0176 )
 
 [node name="SouthLeft" parent="Room/body" instance=ExtResource( 1 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.979046, 0, -5.97574 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 2, 0, -1, 0, -4.37114e-08, -1, 0, -6 )
 handle_position = Vector3( 0, 0, -5.0176 )
 
 [node name="NorthLeft" parent="Room/body" instance=ExtResource( 1 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6.05452, 0, 5.95835 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 2, 0, -1, 0, -4.37114e-08, 6.05452, 0, 6 )
 handle_position = Vector3( 0, 0, -5.0176 )
 
 [node name="NorthRight" parent="Room/body" instance=ExtResource( 1 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.979046, 0, 5.95835 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 2, 0, -1, 0, -4.37114e-08, -1, 0, 6 )
 handle_position = Vector3( 0, 0, -5.0176 )
 
 [node name="Floor" parent="Room/body" instance=ExtResource( 2 )]
 transform = Transform( 6, 0, 0, 0, 0.066, 0, 0, 0, 6, 0, 0, 0 )
 
 [node name="FPS" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.33279, 0 )
+transform = Transform( -0.999393, 0, -0.0348296, 0, 1, 0, 0.0348296, 0, -0.999393, 0, 2.33279, 0 )
+
+[node name="CollisionShape" parent="FPS" index="0"]
+transform = Transform( 0.977116, -0.212706, 9.2977e-09, 0, -4.37114e-08, -1, 0.212706, 0.977116, -4.27111e-08, 0, 0, 0 )
+
+[node name="MeshInstance" parent="FPS" index="1"]
+transform = Transform( 1, -3.72529e-09, 1.11022e-16, 0, -4.37114e-08, -1, 3.72529e-09, 1, -4.37114e-08, 0, 0, 0 )
+
+[node name="Spatial" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.65454, 0, -0.46269 )
+
+[node name="Portal2" parent="." instance=ExtResource( 3 )]
+transform = Transform( 2.035, 0, 0, 0, 3.98, 0, 0, 0, 0.15, 0, 0.034, 5.96 )
+follow_cam = NodePath("../FPS/Head/Camera")
+reference_node = NodePath("../Spatial2")
+
+[node name="Spatial2" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.86884, 0, 0 )
 
 [node name="Portal" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0356405, 0.0663829, -5.28372 )
-follow_cam_input = NodePath("../FPS/Head/Camera")
-reference_node_input = NodePath("../ref")
-
-[node name="ref" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.88106 )
+transform = Transform( 2.017, 0, 0, 0, 3.987, 0, 0, 0, 0.15, 0, 0.034, -5.973 )
+follow_cam = NodePath("../FPS/Head/Camera")
+reference_node = NodePath("../Spatial")
 
 [editable path="FPS"]
